@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title>Espacios del Centro</title>
+<!-- Required meta tags -->
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<!--Mis estilos-->
+<link rel="stylesheet" href="../../static/css/styles.css"
+	th:href="@{/css/styles.css}" />
+<link href="css/" rel="stylesheet" type="text/css"
+	th:href="@{/css/Footer.css}">
+</head>
+<body th:style="'background: url(/img/fondo.jpeg) no-repeat center center fixed;'">
+
+	<div th:replace="Navbar.html :: navbar"></div>
+	<div class="titulos text-center mt-5">
+		<h3 th:text="#{listEspacios.titulo}">ESPACIOS DEL CENTRO</h3>
+	</div>
+
+	<div id="menu" class="opcionesMenu mr-5">
+		<button class="btn btn-primary mr-5 mb-2 bg-light float-right">
+			<a th:href="@{/admin/nuevoEspacio}" th:text="#{listEspacios.anyadir}">Añadir
+				Espacio</a>
+		</button>
+		|
+	</div>
+
+
+	<div class="row mb-5">
+		<div class="col">
+
+			<table class="table table-hover w-75 mx-auto mt-5">
+				<thead>
+					<tr>
+						<th th:text="#{listEspacios.nombre}">Nombre</th>
+						<th th:text="#{listEspacios.centro}">Centro</th>
+						<th th:text="#{listEspacios.alumnos}">Alumnos</th>
+						<th th:text="#{listEspacios.puestos}">Puestos</th>
+						<th th:text="#{listEspacios.operaciones}">Operaciones</th>
+					</tr>
+				</thead>
+				<tr th:each="espacio : ${espacios}">
+					<td th:text="${espacio.nombre}"></td>
+					<td th:text="${espacio.centro.nombre}"></td>
+					<td th:text="${espacio.alumnos}"></td>
+					<td th:text="${espacio.puestos}"></td>
+					<td><a
+						th:href="@{/admin/editarEspacio/{id}(id=${espacio.id})}"
+						th:text="#{listEspacios.editar}">Editar</a> | <a
+						th:href="@{/admin/borrarEspacio/{id}(id=${espacio.id})}"
+						onclick="return confirm('¿ESTÁ SEGURO DE ELIMINAR ESTE ESPACIO?');"
+						th:text="#{listEspacios.eliminar}">Eliminar</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+	 <div class="row mt-5 ml-5">
+	 
+    <div class="form-group col-md-1">
+      <select class="form-control pagination" id="pageSizeSelect">
+        <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
+          th:selected="${pageSize} == ${selectedPageSize}"></option>
+      </select>
+    </div>
+    
+    <div th:if="${espacios.totalPages != 1}" class="form-group col-md-11 pagination-centered">
+      <nav aria-label="Page navigation for espacios en administrador">
+        <ul class="pagination">
+          <!-- Si el número de página es cero, deshabilitamos el enlace -->
+          <li class="page-item" th:class="${espacios.number == 0} ? disabled">
+            <!-- Este enlace nos debe llevar a la primera página, con el tamaño de página actual -->
+            <a class="page-link" th:href="@{/admin/listarTodosEspacios(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+          </li>
+          <!-- Si el número de página es cero, deshabilitamos el enlace -->
+          <li class="page-item" th:class="${espacios.number == 0} ? disabled">
+            <!-- Este enlace nos debe llevar a la página anterior, con el tamaño de página actual -->
+            <a class="page-link"
+              th:href="@{/admin/listarTodosEspacios(pageSize=${selectedPageSize}, page=${espacios.number})}">&larr;</a>
+          </li>
+          <!-- Este bucle genera los enlaces para las demás páginas -->
+          <li class="page-item" th:class="${espacios.number == (page - 1)} ? 'active pointer-disabled'" th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                <a class="page-link"
+                th:href="@{/admin/listarTodosEspacios(pageSize=${selectedPageSize}, page=${page})}"
+                th:text="${page}"></a>
+              </li>
+              <!-- Enlace a la siguiente página; si estamos en la última queda desabilitado  -->
+              <li class="page-item"
+                th:class="${espacios.number + 1 == espacios.totalPages} ? disabled">
+                <a class="page-link"
+                th:href="@{/admin/listarTodosEspacios(pageSize=${selectedPageSize}, page=${espacios.number + 2})}">&rarr;</a>
+              </li>
+              <!-- Enlace a la última página; si estamos en la última queda desabilitado  -->				
+              <li class="page-item"
+                th:class="${espacios.number + 1 == espacios.totalPages} ? disabled">
+                <a class="page-link"
+                th:href="@{/admin/listarTodosEspacios(pageSize=${selectedPageSize}, page=${espacios.totalPages})}">&raquo;</a>
+              </li>
+            </ul>
+          </nav>
+          </div>
+        </div>
+	
+	<div th:replace="Footer.html :: footer"></div>
+
+
+	<!-- Optional JavaScript -->
+
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+		<script type="text/javascript" src="../static/js/listaEspacios.js" th:src="@{/js/listaEspacios.js}"></script>
+		<script type="text/javascript" src="../static/js/I18N.js" th:src="@{/js/I18N.js}"></script>
+</body>
+</html>

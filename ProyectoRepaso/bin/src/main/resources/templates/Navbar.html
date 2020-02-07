@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<meta charset="utf-8">
+<title>Navbar</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link href="css/" rel="stylesheet" type="text/css" th:href="@{/css/}">
+
+</head>
+
+<header th:fragment="navbar">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbarfijado">
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+
+				<th-block sec:authorize="hasRole('ROLE_USER')">
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false" th:text="#{navbar.zonaUsuario}"> Zona de
+						Usuario </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" th:href="@{/usuario/reservar}" th:text="#{navbar.resEspacio}">Reservar
+							Espacio</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" th:href="@{/usuario/reservas}" th:text="#{navbar.misRes}">Mis
+							reservas</a>
+					</div></li>
+				</th-block>
+
+				<th-block sec:authorize="hasRole('ROLE_ADMIN')">
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false" th:text="#{navbar.zonaAdmin}"> Zona de
+						administrador </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" th:href="@{/admin/listarTodosPendiente}"
+							th:text="#{navbar.altasPendientes}">Altas pendientes</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" th:href="@{/admin/listarTodosUsuarios}"
+							th:text="#{navbar.gestionUs}">Gestión de usuarios</a> <a
+							class="dropdown-item" th:href="@{/admin/listarTodosEspacios}"
+							th:text="#{navbar.gestionEs}">Gestión de espacios</a> <a
+							class="dropdown-item" th:href="@{/admin/listarTodosInactivos}"
+							th:text="#{navbar.usuariosIn}">Usuarios inactivos</a> <a
+							class="dropdown-item" th:href="@{/admin/festivos}"
+							th:text="#{navbar.gestionFe}">Gestión de festivos</a> <a
+							class="dropdown-item" th:href="@{/admin/reservasUsuarios}"
+							th:text="#{navbar.gestionResUs}">Gestión de reservas de usuarios</a>
+					</div></li>
+				</th-block>
+
+				<li class="nav-item">
+			        <select class="custom-select" id="locales">
+			          <option selected th:text="#{lang.cambio}">Cambiar idioma</option>
+			          <option value="default" th:text="#{lang.es}">Español</option>
+			          <option value="en_GB" th:text="#{lang.eng}">Ingles</option>
+			        </select>
+			      </li>
+      
+				<li class="nav-item" sec:authorize="isAuthenticated()">
+					<form th:action="@{/logout}" method="POST" id="logoutForm"></form>
+					<a class="nav-link"
+					href="javascript:document.getElementById('logoutForm').submit()"
+					th:text="#{navbar.cerrarSesion}">Cerrar Sesión</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>
+
+<body class="text-center">
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<script type="text/javascript" src="../static/js/I18N.js" th:src="@{/js/I18N.js}"></script>
+
+</html>

@@ -1,0 +1,40 @@
+  h1{
+      text-align: center;
+      font-size: 60px;
+  }
+  #spam {
+    background-color: grey;
+    border-radius: 5px;
+    margin: auto;
+    width: 85%;
+    cursor: not-allowed;
+    margin-top: 10%;
+  }
+  h1 {
+    padding-top: 30px;
+    font-size: 60px;
+    font-family: Arial;
+    text-align: center;
+    border-bottom: 1px solid black;
+    border-bottom-style: dashed;
+    padding-bottom: 20px;
+  }
+  spam {
+     color: red;
+     text-decoration: none;
+     cursor: not-allowed;
+  }
+  p {
+    text-align: center;
+    font-family: Arial;
+    font-weight: bold;
+    padding-bottom: 3%;
+  }
+  small {
+    font-family: Arial;
+    text-align: center;
+    word-spacing: -1px;
+    font-size: 10px;
+    font-weight: normal;
+    color: gray;
+  }

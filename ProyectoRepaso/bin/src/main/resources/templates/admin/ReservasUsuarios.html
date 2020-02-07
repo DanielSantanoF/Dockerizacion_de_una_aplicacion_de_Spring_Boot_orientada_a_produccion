@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta charset="utf-8">
+<title>Reservas Usuarios</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+	<link href="css/" rel="stylesheet" type="text/css"
+	th:href="@{/css/Footer.css}">
+	
+<!-- <link href="../static/css/" rel="stylesheet" th:href="@{/css/}">-->
+</head>
+
+<body th:style="'background: url(/img/fondo.jpeg) no-repeat center center fixed;'">
+
+	<div th:replace="Navbar.html :: navbar"></div>
+
+
+	<div class="titulos text-center mt-5">
+		<h3 th:text="#{listUsuarios.titulo}">RESERVAS DE TODOS LOS USUARIOS</h3>
+	</div>
+
+
+	<table class="table table-hover w-75 mx-auto mt-5">
+		<thead>
+			<tr>
+				<th th:text="#{resUs.id}">Id</th>
+				<th th:text="#{resUs.fecha}">Fecha</th>
+				<th th:text="#{resUs.hora}">Hora</th>
+				<th th:text="#{resUs.espacio}">Espacio</th>
+				<th th:text="#{resUs.usuario}">Usuario</th>
+				<th th:text="#{resUs.operaciones}">Operaciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="reserva : ${reservasUsuarios}"  th:if="${reserva.fecha!=null}">
+				<td th:text="${reserva.id}">1</td>
+				<td th:text="${reserva.fecha}">01-01-2000</td>
+				<td th:text="${reserva.hora}">08:00</td>
+				<td th:text="${reserva.espacio.nombre}">1DAM</td>
+				<td th:text="${reserva.usuario.username}">Manolo</td>
+				<td><a href="#"
+					th:href="@{/admin/borrarReservaUsuario/{id}(id=${reserva.id})}"
+					onclick="return confirm('¿ESTÁ SEGURO DE BORRAR ESTA SOLICITUD?');"
+					th:text="#{resUs.borrar}">Borrar</a> | <a href="#"
+					th:href="@{/admin/reservaUsuarioEspecifico/{id}(id=${reserva.usuario.id})}"
+					th:text="#{resUs.reservasUsuario}">Reservas Usuario</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div th:replace="Footer.html :: footer"></div>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<script type="text/javascript" src="../static/js/indexUsuarios.js"
+	th:src="@{/js/indexUsuarios.js}"></script>
+<script type="text/javascript" src="../static/js/I18N.js" th:src="@{/js/I18N.js}"></script>
+
+</html>

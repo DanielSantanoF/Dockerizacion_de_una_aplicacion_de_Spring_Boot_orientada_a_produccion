@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Espacios reservados</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link href="css/" rel="stylesheet" type="text/css" th:href="@{/css/}"
+	src="../static/css/miguelCss.css">
+<link href="css/" rel="stylesheet" type="text/css" th:href="@{/css/Footer.css}">
+
+
+</head>
+<body th:style="'background: url(/img/fondo.jpeg) no-repeat center center fixed;'">
+
+	<div th:replace="Navbar.html :: navbar"></div>
+	<div class="titulos text-center mt-5">
+		<h3 th:text="#{espRes.titulo}">ESPACIOS DEL CENTRO</h3>
+	</div>
+
+	<table class="table table-hover w-75 mx-auto mt-5">
+		<thead>
+			<tr>
+				<th scope="col" th:text="#{espRes.espacio}">Espacio</th>
+				<th scope="col" th:text="#{espRes.alumnos}">Alumnos</th>
+				<th scope="col" th:text="#{espRes.puestos}">Puestos</th>
+				<th scope="col" th:text="#{espRes.fechas}">Fechas</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="espacio:${lista}">
+				<td th:text="${espacio.nombre}"></td>
+				<td th:text="${espacio.alumnos}"></td>
+				<td th:text="${espacio.puestos}"></td>
+				<td><a
+					th:href="@{/usuario/reservarespacio/{id}(id=${espacio.id})}"><img
+						src="/img/calendar.png"></a></td>
+
+			</tr>
+		</tbody>
+	</table>
+	<div  th:replace="Footer.html :: footer"></div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<script type="text/javascript" src="../static/js/I18N.js" th:src="@{/js/I18N.js}"></script>
+
+</html>

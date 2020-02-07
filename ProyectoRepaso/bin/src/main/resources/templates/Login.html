@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="css/" rel="stylesheet" type="text/css" th:href="@{/css/}">
+
+</head>
+
+<body th:style="'background: url(/img/fondo.jpeg) no-repeat center center fixed;'"s class="text-center">
+
+		<span th:text="#{lang.cambio}"></span>:
+	<select id="locales">
+	    <option value=""></option>
+	    <option value="default" th:text="#{lang.es}"></option>
+	    <option value="en_GB" th:text="#{lang.eng}"></option>
+	</select>
+
+    <div class="container pt-3">
+        <div class="row justify-content-sm-center">
+          <div class="col-sm-6 col-md-4">
+    
+            <div class="card border-info text-center">
+              <div class="card-header">
+                <p th:text="#{IniciarSesion}">Mensaje de iniciar sesion</P>
+              </div>
+              <div class="card-body">
+                <form class="col-12" th:action="@{/login}" method="post">  
+               <!--<form class="form-signin" method="POST" action="#" th:action="@{/login}">-->
+                  <div class="form-group">
+                    <input type="text" id="username" name="username" th:placeholder="#{login.correo}" required autofocus>
+                  </div>
+                  <div class="form-group">
+                    <input type="password" name="password" id="password" th:placeholder="#{login.password}" required>
+                  </div>
+                  <button class="btn btn-lg btn-primary btn-block mb-1" type="submit" name="enviar" value="Enviar" th:text="#{login.boton}">
+                  <span th:text="#{login.boton}">Iniciar Sesión</span>
+                  </button>
+                  <div class="d-flex justify-content-center links">
+                    <p th:text="#{login.nocuenta}">No tienes una cuenta?</P>
+                    <a href="Registrarse.html" th:href="@{/registrarse}" class="ml-2" th:text="#{login.registrarte}">Regístrate</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../static/js/I18N.js" th:src="@{/js/I18N.js}"></script>
+
+</html>

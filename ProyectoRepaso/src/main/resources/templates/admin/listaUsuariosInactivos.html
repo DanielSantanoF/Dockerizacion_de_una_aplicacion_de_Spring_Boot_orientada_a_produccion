@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<title>Usuarios Desactivados</title>
+<!-- Required meta tags -->
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<!--Mis estilos-->
+<link rel="stylesheet" href="../../static/css/styles.css"
+	th:href="@{/css/styles.css}" />
+
+<link href="css/" rel="stylesheet" type="text/css"
+	th:href="@{/css/Footer.css}">
+</head>
+<body th:style="'background: url(/img/fondo.jpeg) no-repeat center center fixed;'">
+
+	<div th:replace="Navbar.html :: navbar"></div>
+
+	<div class="titulos text-center mt-5">
+		<h3 th:text="#{listUsIn.titulo}">USUARIOS DESACTIVADOS</h3>
+	</div>
+
+	<div class="row">
+		<div class="col">
+
+			<table class="table table-hover w-75 mx-auto mt-5">
+				<thead>
+					<tr>
+						<th th:text="#{listUsIn.nombre}">Nombre</th>
+						<th th:text="#{listUsIn.email}">Email</th>
+						<th th:text="#{listUsIn.fechaAlta}">Fecha de Alta</th>
+						<th th:text="#{listUsIn.operaciones}">Operaciones</th>
+					</tr>
+				</thead>
+				<tr th:each="usuario : ${listaInactivos}">
+					<td th:text="${usuario.username}"></td>
+					<td th:text="${usuario.email}"></td>
+					<td
+						th:text="${#temporals.format(usuario.fechaalta, 'dd-MMM-yyyy')}"></td>
+					<td><a th:href="@{/admin/activar/{id}(id=${usuario.id})}"
+						onclick="return confirm('¿SEGURO QUE DESEA ACTIVAR ESTE USUARIO?');"
+						th:text="#{listUsIn.reactivar}">Reactivar</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div th:replace="Footer.html :: footer"></div>
+
+	<!-- Optional JavaScript -->
+
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript" src="../static/js/I18N.js" th:src="@{/js/I18N.js}"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<meta charset="utf-8">
+<title>Nuevo espacio</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../../static/css/styles.css"
+	th:href="@{/css/styles.css}" />
+<link href="css/" rel="stylesheet" type="text/css"
+	th:href="@{/css/Footer.css}">
+
+</head>
+
+<body th:style="'background: url(/img/fondo.jpeg) no-repeat center center fixed;'">
+	<div class="titulos text-center mt-5">
+		<h3 th:text="#{regEspacio.titulo}">NUEVO ESPACIO</h3>
+	</div>
+
+	<div class="container pt-3">
+		<div class="row justify-content-sm-center">
+			<div class="col-10">
+
+				<div class="card border-info text-left">
+					<div class="card-body">
+						<form class="needs-validation"
+							th:action="@{/admin/nuevoEspacio/submit}" th:object="${espacio}"
+							method="post" id="register" name="register">
+							<div class="form-group">
+								<input th:if="${espacio.id != 0}" type="hidden" name="id"
+									th:field="*{id}" /> <label for="nombre"
+									th:text="#{regEspacio.nombre}">Nombre: </label> <input
+									class="form-control form-control-lg" type="text" name="nombre"
+									th:field="*{nombre}" th:placeholder="#{regEspacio.nombre2}" />
+							</div>
+							<div class="form-group">
+								<label for="centro" th:text="#{regEspacio.centro}">Centro:
+								</label> <select id="centro" class="form-control" th:field="*{centro}">
+									<option th:each="centro : ${centro}" th:value="${centro.id}"
+										th:text="${centro.nombre}">N/S</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="alumnos" th:text="#{regEspacio.alumnos}">Alumnos:
+								</label> <input class="form-control form-control-lg" type="number"
+									name="alumnos" th:field="*{alumnos}"
+									th:placeholder="#{regEspacio.alumnos2}" />
+							</div>
+							<div class="form-group">
+								<label for="puestos" th:text="#{regEspacio.puestos}">Puestos:
+								</label> <input class="form-control form-control-lg" type="number"
+									name="puestos" th:field="*{puestos}"
+									th:placeholder="#{regEspacio.puestos2}" />
+							</div>
+							<button class="btn btn-lg btn-primary btn-block mb-1"
+								type="submit" name="enviar" value="Enviar"
+								th:text="#{regEspacio.registrar2}">Registrar nuevo espacio</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="Footer.html :: footer"></div>
+
+	
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+<script type="text/javascript" src="../static/js/I18N.js" th:src="@{/js/I18N.js}"></script>
+
+</html>
